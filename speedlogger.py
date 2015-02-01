@@ -35,7 +35,7 @@ while True:
     cumulDist += 2.114
     #output facile pour import dans Excel
     #outStr "{:4.3f}".format((currTime-startTime)/60)+","+"{:4.3f}".format(cumulDist/1000)+","+"{:4.1f}".format(currSpeed)
-    print currSpeed       #display
+    print "{:4.1f}".format(currSpeed)       #display
     f.write(outStr+"\n") #print to file
     GPIO.output(12,False)
     time.sleep(0.05)
