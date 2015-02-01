@@ -9,7 +9,9 @@ lastTime = time.time()
 currTime = lastTime
 cumulDist = 0
 startTime = 0
+outStr = "string to be outputed to file and console"
 
+GPIO.setwarnings(False)
 GPIO.setup(11,GPIO.IN)
 GPIO.setup(12,GPIO.OUT)
 
@@ -33,7 +35,6 @@ while True:
     cumulDist += 2.114
     #output facile pour import dans Excel
     #outStr "{:4.3f}".format((currTime-startTime)/60)+","+"{:4.3f}".format(cumulDist/1000)+","+"{:4.1f}".format(currSpeed)
-    outStr = currSpeed #simple string for logging to file
     print currSpeed       #display
     f.write(outStr+"\n") #print to file
     GPIO.output(12,False)
