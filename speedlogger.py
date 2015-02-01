@@ -32,8 +32,8 @@ while True:
     #2.114m de circonference * 3600s/h / 1000 m/km
     cumulDist += 2.114
     #output facile pour import dans Excel
-    outStr "{:4.3f}".format((currTime-startTime)/60)+","+"{:4.3f}".format(cumulDist/1000)+","+"{:4.1f}".format(currSpeed)
-    print outStr        #display
+    #outStr "{:4.3f}".format((currTime-startTime)/60)+","+"{:4.3f}".format(cumulDist/1000)+","+"{:4.1f}".format(currSpeed)
+    print currSpeed       #display
     f.write(outStr+"\n") #print to file
     GPIO.output(12,False)
     time.sleep(0.05)
