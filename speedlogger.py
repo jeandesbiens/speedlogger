@@ -21,7 +21,7 @@ startTime = time.time()
 
 print "Entrainement du ",time.ctime()
 f = open('out.txt','w')
-f.write(time.ctime(),"\n")
+f.write(time.ctime()+"\n")
 while True:
   currState = GPIO.input(11)
   if currState and not lastState : 
@@ -33,6 +33,7 @@ while True:
     cumulDist += 2.114
     #output facile pour import dans Excel
     #outStr "{:4.3f}".format((currTime-startTime)/60)+","+"{:4.3f}".format(cumulDist/1000)+","+"{:4.1f}".format(currSpeed)
+    outStr = currSpeed #simple string for logging to file
     print currSpeed       #display
     f.write(outStr+"\n") #print to file
     GPIO.output(12,False)
