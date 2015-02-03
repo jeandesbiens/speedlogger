@@ -46,3 +46,5 @@ while True:
   lastState = currState
   lastTime = currTime
   time.sleep(0.001)
+
+f.close()
