@@ -49,6 +49,7 @@ while True:
     outStr = speedColorStr +speedStr + "\033[1;m" + meanSpeedStr + timeStr + distanceStr
     print outStr
     # storing data to database
+    # CREATE TABLE speeds (timestamp DATETIME, speed NUMERIC);
     conn=sqlite3.connect(dbname)
     curs=conn.cursor()
     curs.execute("INSERT INTO speeds values(datetime('now'), (?))", (currSpeed,))
