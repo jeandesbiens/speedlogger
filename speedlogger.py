@@ -37,7 +37,7 @@ while True:
     timeStr = "{:4.2f}".format((currTime-startTime)/60)+" min. "
     distanceStr = "{:4.2f}".format(cumulDist/1000)+" km "
     speedStr = "{:4.1f}".format(currSpeed)+" km/h "
-    meanSpeedStr = "{:4.1f}".format((cumulDist/1000)/(currTime-startTime)/60/60)+" km/h "
+    meanSpeedStr = "{:4.1f}".format((cumulDist)/(currTime-startTime))+" m/s "
     outStr = speedStr + meanSpeedStr + timeStr + distanceStr
     print outStr
     f.write(outStr+"\n") #print to file
