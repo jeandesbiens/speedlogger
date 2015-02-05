@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import time
 import RPi.GPIO as GPIO
+from termcolor import colored
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -38,7 +39,7 @@ while True:
     distanceStr = "{:4.2f}".format(cumulDist/1000)+" km "
     speedStr = "{:4.1f}".format(currSpeed)+" km/h "
     meanSpeedStr = "{:4.1f}".format((cumulDist)/(currTime-startTime))+" m/s "
-    outStr = speedStr + meanSpeedStr + timeStr + distanceStr
+    outStr = colored(speedStr,'green') + meanSpeedStr + timeStr + distanceStr
     print outStr
     f.write(outStr+"\n") #print to file
     GPIO.output(12,False)
