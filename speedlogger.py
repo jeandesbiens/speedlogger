@@ -1,8 +1,11 @@
 #!/usr/bin/python
 import time
 import RPi.GPIO as GPIO
+import sqlite3
 
 GPIO.setmode(GPIO.BOARD)
+
+dbname = 'logger.db'
 
 lastState = False
 lastTime = time.time()
@@ -45,6 +48,14 @@ while True:
     meanSpeedStr = "{:4.1f}".format((cumulDist)/(currTime-startTime))+" m/s "
     outStr = speedColorStr +speedStr + "\033[1;m" + meanSpeedStr + timeStr + distanceStr
     print outStr
+    # storing data to database
+    conn=sqlite3.connect(dbname)
+    curs=conn.cursor()
+    curs.execute("INSERT INTO speeds values(datetime('now'), (?))", (currSpeed,))
+    # commit the changes
+    conn.commit()
+    conn.close()
+    # end of storing data to database
     f.write(outStr+"\n") #print to file
     GPIO.output(12,False)
     time.sleep(0.05)
