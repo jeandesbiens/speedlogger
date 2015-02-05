@@ -37,8 +37,12 @@ while True:
     timeStr = "{:4.2f}".format((currTime-startTime)/60)+" min. "
     distanceStr = "{:4.2f}".format(cumulDist/1000)+" km "
     speedStr = "{:4.1f}".format(currSpeed)+" km/h "
+    if currSpeed < 20 :
+      speedColorStr = "\033[1;42m"
+    else :
+      speedColorStr = "\033[1;43m"
     meanSpeedStr = "{:4.1f}".format((cumulDist)/(currTime-startTime))+" m/s "
-    outStr = "\033[1;42m" +speedStr + "\033[1;m" + meanSpeedStr + timeStr + distanceStr
+    outStr = speedColorStr +speedStr + "\033[1;m" + meanSpeedStr + timeStr + distanceStr
     print outStr
     f.write(outStr+"\n") #print to file
     GPIO.output(12,False)
