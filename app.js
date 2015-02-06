@@ -7,7 +7,7 @@ var restapi = express();
 restapi.get('/', function(req, res){
   db.get("SELECT * FROM speeds ORDER BY timestamp DESC LIMIT 1", function(err, row){
   	if (err){
-            console.err("ERROR detected at / endpoint : "+err);
+            console.error("ERROR detected at / endpoint : "+err);
             res.status(500);
         }
         else {
@@ -22,7 +22,7 @@ restapi.get('/', function(req, res){
 '     	<p>'+row.speed+'</p>'+
 '    </body>'+
 '</html>');
-        console.log("/ endpoint has been called, returning data : "+row);
+        console.log("/ endpoint has been called, returning data : "+row.speed);
         }
 
     });
@@ -38,7 +38,7 @@ restapi.get('/data', function(req, res){
 restapi.post('/data', function(req, res){
     db.run("UPDATE counts SET value = value + 1 WHERE key = ?", "counter", function(err, row){
         if (err){
-            console.err(err);
+            console.error(err);
             res.status(500);
         }
         else {
