@@ -1,22 +1,17 @@
-
-
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('logger.db');
- 
-db.serialize(function() {
-    db.run("CREATE TABLE IF NOT EXISTS counts (key TEXT, value INTEGER)");
-    db.run("INSERT INTO counts (key, value) VALUES (?, ?)", "counter", 0);
-});
- 
- 
  
 var express = require('express');
 var restapi = express();
  
 restapi.get('/', function(req, res){
-	console.log("/ endpoint has been called");
   db.get("SELECT * FROM speeds ORDER BY timestamp DESC LIMIT 1", function(err, row){
-        res.send('<!DOCTYPE html>'+
+  	if (err){
+            console.err("ERROR detected at / endpoint : "+err);
+            res.status(500);
+        }
+        else {
+             res.send('<!DOCTYPE html>'+
 '<html>'+
 '    <head>'+
 '        <meta charset="utf-8" />'+
@@ -27,7 +22,8 @@ restapi.get('/', function(req, res){
 '     	<p>'+row.speed+'</p>'+
 '    </body>'+
 '</html>');
-
+        console.log("/ endpoint has been called, returning data : "+row);
+        }
 
     });
 });
