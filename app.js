@@ -13,6 +13,24 @@ db.serialize(function() {
 var express = require('express');
 var restapi = express();
  
+restapi.get('/', function(req, res){
+  db.get("SELECT * FROM speeds ORDER BY timestamp DESC LIMIT 1", function(err, row){
+        res.json(row)
+        res.write('<!DOCTYPE html>'+
+'<html>'+
+'    <head>'+
+'        <meta charset="utf-8" />'+
+'        <title>Tachymetre!</title>'+
+'    </head>'+ 
+'    <body>'+
+'     	<p>'+row.speed+'</p>'+
+'    </body>'+
+'</html>');
+
+
+    });
+});
+
 restapi.get('/data', function(req, res){
     db.all("SELECT * FROM speeds", function(err, rows){
         res.json(rows)
