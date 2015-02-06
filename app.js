@@ -14,8 +14,8 @@ var express = require('express');
 var restapi = express();
  
 restapi.get('/data', function(req, res){
-    db.get("SELECT * FROM speeds", function(err, row){
-        res.json({ "count" : row.value });
+    db.each("SELECT * FROM speeds", function(err, row){
+        res.json({row.info });
     });
 });
  
