@@ -15,7 +15,6 @@ var restapi = express();
  
 restapi.get('/', function(req, res){
   db.get("SELECT * FROM speeds ORDER BY timestamp DESC LIMIT 1", function(err, row){
-        res.json(row)
         res.write('<!DOCTYPE html>'+
 '<html>'+
 '    <head>'+
