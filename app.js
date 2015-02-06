@@ -14,8 +14,9 @@ var express = require('express');
 var restapi = express();
  
 restapi.get('/', function(req, res){
+	console.log("/ endpoint has been called");
   db.get("SELECT * FROM speeds ORDER BY timestamp DESC LIMIT 1", function(err, row){
-        res.write('<!DOCTYPE html>'+
+        res.send('<!DOCTYPE html>'+
 '<html>'+
 '    <head>'+
 '        <meta charset="utf-8" />'+
@@ -32,6 +33,7 @@ restapi.get('/', function(req, res){
 });
 
 restapi.get('/data', function(req, res){
+	console.log("/data endpoint has been called");
     db.all("SELECT * FROM speeds", function(err, rows){
         res.json(rows)
     });
