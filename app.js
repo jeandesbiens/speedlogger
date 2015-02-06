@@ -15,7 +15,7 @@ var restapi = express();
  
 restapi.get('/data', function(req, res){
     db.each("SELECT * FROM speeds", function(err, row){
-        res.json({row });
+        res.json(row);
     });
 });
  
