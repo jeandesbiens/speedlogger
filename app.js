@@ -24,8 +24,8 @@ restapi.get('/', function(req, res){
 '</html>');
         console.log("/ endpoint has been called, returning data : "+row.speed);
         }
-
     });
+  db.close()
 });
 
 restapi.get('/data', function(req, res){
