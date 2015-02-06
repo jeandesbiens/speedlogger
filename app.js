@@ -19,6 +19,7 @@ restapi.get('/', function(req, res){
 '<html>'+
 '    <head>'+
 '        <meta charset="utf-8" />'+
+'		 <meta http-equiv="refresh" content="1">'+
 '        <title>Tachymetre!</title>'+
 '    </head>'+ 
 '    <body>'+
