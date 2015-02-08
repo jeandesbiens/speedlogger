@@ -5,7 +5,8 @@ import sqlite3
 
 dbname = 'logger.db'
 
-lastState = False
+WHEEL_CIRCUMFERENCE = 2.114 #circonference of the wheel in meter
+lastState = False 
 lastTime = time.time()
 currTime = lastTime
 cumulDist = 0
@@ -33,10 +34,11 @@ while True:
   if currState and not lastState : #if we pass from low to high
     currTime = time.time()
     dt = currTime-lastTime
-    currSpeed = 7.6104/dt  #7.6104 is 2.114m de circonference * 3600s/h / 1000 m/km
-    cumulDist += 2.114
-    #output facile pour import dans Excel
-    timeStr = "{:4.2f}".format((currTime-startTime)/60)+" min. "
+    currSpeed = (WHEEL_CIRCUMFERENCE*3600/1000)/dt  # WHEEL_CIRCUMFERENCE * 3600s/h / 1000 m/km --> km/h
+    cumulDist += WHEEL_CIRCUMFERENCE
+    
+    #output strings
+    timeStr = "{:4.2f}".format((currTime-startTime)/60)+" min. "  #this is time for this session
     distanceStr = "{:4.2f}".format(cumulDist/1000)+" km "
     speedStr = "{:4.1f}".format(currSpeed)+" km/h "
     # voir http://www.siafoo.net/snippet/88 pour les code de couleurs
@@ -46,8 +48,8 @@ while True:
       speedColorStr = "\033[1;42m"
     meanSpeedStr = "{:4.2f}".format((cumulDist)/(currTime-startTime))+" m/s "
     outStr = speedColorStr +speedStr + "\033[1;m" + meanSpeedStr + timeStr + distanceStr
-
     print outStr
+
     # storing data to database
     # CREATE TABLE speeds (timestamp DATETIME, speed NUMERIC);
     #conn=sqlite3.connect(dbname)
@@ -58,12 +60,11 @@ while True:
     #conn.close()
     # end of storing data to database
 
-    GPIO.output(12,False)
-    time.sleep(0.0005)
-    GPIO.output(12,True)
- # else :
-   # print "."
- #   GPIO.output(12,True)
+    #GPIO.output(12,False)
+    #time.sleep(0.0005)
+    #GPIO.output(12,True)
+# end if
   lastState = currState
   lastTime = currTime
   time.sleep(0.0001)
+#end while
