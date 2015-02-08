@@ -26,7 +26,6 @@ restapi.get('/', function(req, res){
 		'    </body>'+
 		'</html>');
         console.log("/ endpoint has been called, returning data : "+lastKnownSpeed);
-        }
     });
 });
 
