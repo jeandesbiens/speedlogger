@@ -3,26 +3,29 @@ var db = new sqlite3.Database('logger.db');
  
 var express = require('express');
 var restapi = express();
+
+var lastKnownSpeed = 0;
  
 restapi.get('/', function(req, res){
   db.get("SELECT * FROM speeds ORDER BY timestamp DESC LIMIT 1", function(err, row){
   	if (err){
-            console.error("ERROR detected at / endpoint : "+err);
-            res.status(500);
-        }
-        else {
-             res.send('<!DOCTYPE html>'+
-'<html>'+
-'    <head>'+
-'        <meta charset="utf-8" />'+
-'		 <meta http-equiv="refresh" content="1">'+
-'        <title>Tachymetre!</title>'+
-'    </head>'+ 
-'    <body>'+
-'     	<p>'+row.speed+'</p>'+
-'    </body>'+
-'</html>');
-        console.log("/ endpoint has been called, returning data : "+row.speed);
+  		console.error("ERROR detected at / endpoint : "+err);
+  	}
+  		else {
+  			lastKnownSpeed = row.speed;
+  		}
+    res.send('<!DOCTYPE html>'+
+		'<html>'+
+		'    <head>'+
+		'        <meta charset="utf-8" />'+
+		'		 <meta http-equiv="refresh" content="1">'+
+		'        <title>Tachymetre!</title>'+
+		'    </head>'+ 
+		'    <body>'+
+		'     	<p>'+lastKnownSpeed+'</p>'+
+		'    </body>'+
+		'</html>');
+        console.log("/ endpoint has been called, returning data : "+lastKnownSpeed);
         }
     });
 });
