@@ -14,19 +14,22 @@ cumulDist = 0
 startTime = 0
 outStr = ""
 
+# setup the pins on the raspberry pi
 GPIO.setwarnings(False)
-GPIO.setup(11,GPIO.IN)
-GPIO.setup(12,GPIO.OUT)
+GPIO.setup(11,GPIO.IN)  # pin for signal from reed switch
+GPIO.setup(12,GPIO.OUT) # pin for the LED
 
+# rappeler au cycliste de mettre la tension sur la roue
 print "------------------------------ "
 print "Mettre la roue sous tension"
 print "------------------------------ "
-print "Temps (m), Distance (km), Vitesse (km)"
+print "Entrainement du ",time.ctime()
+
+
 startTime = time.time()
 
-print "Entrainement du ",time.ctime()
-f = open('out.txt','w')
-f.write(time.ctime()+"\n")
+#f = open('out.txt','w')
+#f.write(time.ctime()+"\n")
 while True:
   currState = GPIO.input(11)
   if currState and not lastState : 
@@ -57,15 +60,15 @@ while True:
     conn.commit()
     conn.close()
     # end of storing data to database
-    f.write(outStr+"\n") #print to file
-    GPIO.output(12,False)
-    time.sleep(0.05)
-    GPIO.output(12,True)
+ #   f.write(outStr+"\n") #print to file
+ #   GPIO.output(12,False)
+ #   time.sleep(0.05)
+ #   GPIO.output(12,True)
   else :
    # print "."
-    GPIO.output(12,True)
+ #   GPIO.output(12,True)
   lastState = currState
   lastTime = currTime
   time.sleep(0.001)
 
-f.close()
+#f.close()
