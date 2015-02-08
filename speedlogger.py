@@ -25,11 +25,12 @@ print "Mettre la roue sous tension"
 print "------------------------------ "
 print "Entrainement du ",time.ctime()
 
-
+#setup le début de session
 startTime = time.time()
+ # CREATE TABLE speeds (timestamp DATETIME, speed NUMERIC);
+conn=sqlite3.connect(dbname)
+curs=conn.cursor()
 
-#f = open('out.txt','w')
-#f.write(time.ctime()+"\n")
 while True:
   currState = GPIO.input(11)
   if currState and not lastState : 
@@ -52,15 +53,11 @@ while True:
     outStr = speedColorStr +speedStr + "\033[1;m" + meanSpeedStr + timeStr + distanceStr
     print outStr
     # storing data to database
-    # CREATE TABLE speeds (timestamp DATETIME, speed NUMERIC);
-    conn=sqlite3.connect(dbname)
-    curs=conn.cursor()
     curs.execute("INSERT INTO speeds values(datetime('now'), (?))", (currSpeed,))
     # commit the changes
     conn.commit()
-    conn.close()
     # end of storing data to database
- #   f.write(outStr+"\n") #print to file
+
  #   GPIO.output(12,False)
  #   time.sleep(0.05)
  #   GPIO.output(12,True)
@@ -71,4 +68,4 @@ while True:
   lastTime = currTime
   time.sleep(0.001)
 
-#f.close()
+ conn.close()
