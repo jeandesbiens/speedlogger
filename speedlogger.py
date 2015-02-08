@@ -49,11 +49,7 @@ while True:
     meanSpeedStr = "{:4.2f}".format((cumulDist)/(currTime-startTime))+" m/s "
     outStr = speedColorStr +speedStr + "\033[1;m" + meanSpeedStr + timeStr + distanceStr
     if DEBUG :
-      print "currState : "+currState
-      print "lastState : "+lastState
-      print "currTime : "+currTime
-      print "dt : "+dt
-      print "currSpeed : "+currSpeed
+      print "DEBUG INFO:"
 
     print outStr
     # storing data to database
