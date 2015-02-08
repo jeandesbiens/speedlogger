@@ -9,7 +9,7 @@ var lastKnownSpeed = 0;
 restapi.get('/', function(req, res){
   db.get("SELECT * FROM speeds ORDER BY timestamp DESC LIMIT 1", function(err, row){
   	if (err){
-  		console.error("ERROR detected at / endpoint : "+err);
+  		//console.error("ERROR detected at / endpoint : "+err);
   	}
   		else {
   			lastKnownSpeed = row.speed;
@@ -25,7 +25,7 @@ restapi.get('/', function(req, res){
 		'     	<p>'+lastKnownSpeed+'</p>'+
 		'    </body>'+
 		'</html>');
-        console.log("/ endpoint has been called, returning data : "+lastKnownSpeed);
+        //console.log("/ endpoint has been called, returning data : "+lastKnownSpeed.toFixed(1)+" km/h");
     });
 });
 

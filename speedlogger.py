@@ -45,7 +45,7 @@ while True:
       speedColorStr = "\033[1;43m"
     else :
       speedColorStr = "\033[1;42m"
-    meanSpeedStr = "{:4.1f}".format((cumulDist)/(currTime-startTime))+" m/s "
+    meanSpeedStr = "{:4.2f}".format((cumulDist)/(currTime-startTime))+" m/s "
     outStr = speedColorStr +speedStr + "\033[1;m" + meanSpeedStr + timeStr + distanceStr
     print outStr
     # storing data to database
