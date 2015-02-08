@@ -52,12 +52,11 @@ while True:
 
     # storing data to database
     # CREATE TABLE speeds (timestamp DATETIME, speed NUMERIC);
-    #conn=sqlite3.connect(dbname)
-    #curs=conn.cursor()
-    #curs.execute("INSERT INTO speeds values(datetime('now'), (?))", (currSpeed,))
-    # commit the changes
-    #conn.commit()
-    #conn.close()
+    conn=sqlite3.connect(dbname)
+    curs=conn.cursor()
+    curs.execute("INSERT INTO speeds values(datetime('now'), (?))", (currSpeed,))
+    conn.commit()
+    conn.close()
     # end of storing data to database
 
     #GPIO.output(12,False)
