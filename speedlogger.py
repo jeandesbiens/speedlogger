@@ -27,7 +27,7 @@ print "Mettre la roue sous tension"
 print "------------------------------ "
 print "Entrainement du ",time.ctime()
 
-#setup le début de session
+#setup le debut de session
 startTime = time.localtime()
  # CREATE TABLE speeds (timestamp DATETIME, speed NUMERIC);
 conn=sqlite3.connect(dbname)
@@ -57,7 +57,7 @@ while True:
       print "currTime : "+currTime
       print "dt : "+dt
       print "currSpeed : "+currSpeed
-      
+
     print outStr
     # storing data to database
     #curs.execute("INSERT INTO speeds values(datetime('now'), (?))", (currSpeed,))
