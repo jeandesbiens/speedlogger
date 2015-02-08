@@ -11,8 +11,6 @@ currTime = lastTime
 cumulDist = 0
 startTime = 0
 outStr = ""
-DEBUG = True
-
 
 # setup the pins on the raspberry pi
 GPIO.setmode(GPIO.BOARD)
@@ -48,8 +46,6 @@ while True:
       speedColorStr = "\033[1;42m"
     meanSpeedStr = "{:4.2f}".format((cumulDist)/(currTime-startTime))+" m/s "
     outStr = speedColorStr +speedStr + "\033[1;m" + meanSpeedStr + timeStr + distanceStr
-    if DEBUG :
-      print "DEBUG INFO:"
 
     print outStr
     # storing data to database
@@ -63,11 +59,11 @@ while True:
     # end of storing data to database
 
     GPIO.output(12,False)
-    time.sleep(0.05)
+    time.sleep(0.0005)
     GPIO.output(12,True)
  # else :
    # print "."
  #   GPIO.output(12,True)
   lastState = currState
   lastTime = currTime
-  time.sleep(0.001)
+  time.sleep(0.0001)
