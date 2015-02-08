@@ -53,9 +53,9 @@ while True:
     outStr = speedColorStr +speedStr + "\033[1;m" + meanSpeedStr + timeStr + distanceStr
     print outStr
     # storing data to database
-    curs.execute("INSERT INTO speeds values(datetime('now'), (?))", (currSpeed,))
+    #curs.execute("INSERT INTO speeds values(datetime('now'), (?))", (currSpeed,))
     # commit the changes
-    conn.commit()
+    #conn.commit()
     # end of storing data to database
 
  #   GPIO.output(12,False)
