@@ -68,7 +68,7 @@ while True:
     GPIO.output(12,False)
     time.sleep(0.05)
     GPIO.output(12,True)
-  else :
+ # else :
    # print "."
  #   GPIO.output(12,True)
   lastState = currState
