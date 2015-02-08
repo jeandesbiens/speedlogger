@@ -31,8 +31,6 @@ print "Entrainement du ",time.ctime()
 
 #setup le debut de session
 startTime = time.time()
-conn=sqlite3.connect(dbname)
-curs=conn.cursor()
 
 while True:
   currState = GPIO.input(11)
@@ -59,17 +57,16 @@ while True:
     if currTime-lastLog > LOGGING_INTERVAL :
       print "LOGGING...." + speedStr
       lastLog = currTime
-      
+      conn=sqlite3.connect(dbname)
+      curs=conn.cursor()
       curs.execute("INSERT INTO speeds values(datetime('now','localtime'), (?))", (currSpeed,))
       conn.commit()
-    
-   
-    #GPIO.output(12,False)
-    #time.sleep(0.0005)
-    #GPIO.output(12,True)
+      conn.close()
+      GPIO.output(12,False) # blink the LED
+      time.sleep(0.02)
+      GPIO.output(12,True)
 # end if
   lastState = currState
   lastTime = currTime
   time.sleep(0.0001)
 #end while
-conn.close()
