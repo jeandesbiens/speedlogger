@@ -6,8 +6,11 @@ import sqlite3
 dbname = 'logger.db'
 
 WHEEL_CIRCUMFERENCE = 2.114 #circonference of the wheel in meter
+LOGGING_INTERVAL = 5 # logging interval to database in seconds
+
 lastState = False 
 lastTime = time.time()
+lastLog = time.time()
 currTime = lastTime
 cumulDist = 0
 startTime = 0
@@ -28,8 +31,7 @@ print "Entrainement du ",time.ctime()
 
 #setup le debut de session
 startTime = time.time()
-conn=sqlite3.connect(dbname)
-curs=conn.cursor()
+
 
 while True:
   currState = GPIO.input(11)
@@ -52,13 +54,18 @@ while True:
     outStr = speedColorStr +speedStr + "\033[1;m" + meanSpeedStr + timeStr + distanceStr
     print outStr
 
-    # storing data to database
     # CREATE TABLE speeds (timestamp DATETIME, speed NUMERIC);
+    if currTime-lastLog > LOGGING_INTERVAL :
+      print "LOGGING...." + speedStr
+      lastLog = currTime
+
+    if False : # log to db at n milliseconds interval
+      conn=sqlite3.connect(dbname)
+      curs=conn.cursor()
+      curs.execute("INSERT INTO speeds values(datetime('now'), (?))", (currSpeed,))
+      conn.commit()
+      conn.close()
    
-    curs.execute("INSERT INTO speeds values(datetime('now'), (?))", (currSpeed,))
-    conn.commit()
-    
-    # end of storing data to database
 
     #GPIO.output(12,False)
     #time.sleep(0.0005)
@@ -68,4 +75,3 @@ while True:
   lastTime = currTime
   time.sleep(0.0001)
 #end while
-conn.close()
