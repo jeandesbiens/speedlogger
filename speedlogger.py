@@ -58,15 +58,12 @@ while True:
     if currTime-lastLog > LOGGING_INTERVAL :
       print "LOGGING...." + speedStr
       lastLog = currTime
-
-    if False : # log to db at n milliseconds interval
       conn=sqlite3.connect(dbname)
       curs=conn.cursor()
       curs.execute("INSERT INTO speeds values(datetime('now'), (?))", (currSpeed,))
       conn.commit()
       conn.close()
    
-
     #GPIO.output(12,False)
     #time.sleep(0.0005)
     #GPIO.output(12,True)
