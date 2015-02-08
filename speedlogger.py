@@ -6,7 +6,7 @@ import sqlite3
 dbname = 'logger.db'
 
 lastState = False
-lastTime = time.localtime()
+lastTime = time.time()
 currTime = lastTime
 cumulDist = 0
 startTime = 0
@@ -28,13 +28,12 @@ print "------------------------------ "
 print "Entrainement du ",time.ctime()
 
 #setup le debut de session
-startTime = time.localtime()
-
+startTime = time.time()
 
 while True:
   currState = GPIO.input(11)
   if currState and not lastState : #if we pass from low to high
-    currTime = time.localtime()
+    currTime = time.time()
     dt = currTime-lastTime
     currSpeed = 7.6104/dt  #7.6104 is 2.114m de circonference * 3600s/h / 1000 m/km
     cumulDist += 2.114
