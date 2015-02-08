@@ -60,7 +60,7 @@ while True:
       lastLog = currTime
       conn=sqlite3.connect(dbname)
       curs=conn.cursor()
-      curs.execute("INSERT INTO speeds values((?), (?))", (time.localtime(),currSpeed,))
+      curs.execute("INSERT INTO speeds values(datetime('now','localtime'), (?))", (currSpeed,))
       conn.commit()
       conn.close()
    
