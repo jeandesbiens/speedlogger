@@ -65,7 +65,7 @@ while True:
       GPIO.output(12,False) # blink the LED
       time.sleep(0.02)
       GPIO.output(12,True)
-      print "LOGGING...." + speedStr + "     -- time to log (s) : "+ (time.time()-currTime)
+      print "LOGGING...." + speedStr + "     -- time to log (s) : "+ "{:4.2f}".format(time.time()-currTime)
 # end if
   lastState = currState
   lastTime = currTime
