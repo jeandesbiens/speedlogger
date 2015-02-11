@@ -55,7 +55,7 @@ while True:
 
     # CREATE TABLE speeds (timestamp DATETIME, speed NUMERIC);
     if currTime-lastLog > LOGGING_INTERVAL :
-      print "LOGGING...." + speedStr
+      
       lastLog = currTime
       conn=sqlite3.connect(dbname)
       curs=conn.cursor()
@@ -65,6 +65,7 @@ while True:
       GPIO.output(12,False) # blink the LED
       time.sleep(0.02)
       GPIO.output(12,True)
+      print "LOGGING...." + speedStr + "     -- time to log (s) : "+ (time.time()-currTime)
 # end if
   lastState = currState
   lastTime = currTime
