@@ -3,6 +3,20 @@ import time
 import RPi.GPIO as GPIO
 import sqlite3
 
+def logToDB(atTime, atSpeed)
+  # CREATE TABLE speeds (timestamp DATETIME, speed NUMERIC);
+  conn=sqlite3.connect(dbname)
+  curs=conn.cursor()
+  curs.execute("INSERT INTO speeds values(datetime('now','localtime'), (?))", (currSpeed,))
+  conn.commit()
+  conn.close()
+  print "LOGGING...." + speedStr + "     -- time to log (s) : "+ "{:4.2f}".format(time.time()-currTime)
+
+def blinkLED()
+  GPIO.output(12,False) # blink the LED
+  time.sleep(0.02)
+  GPIO.output(12,True)
+
 dbname = 'logger.db'
 
 WHEEL_CIRCUMFERENCE = 2.114 #circonference of the wheel in meter
@@ -53,20 +67,12 @@ while True:
     outStr = speedColorStr +speedStr + "\033[1;m" + meanSpeedStr + timeStr + distanceStr
     print outStr
 
-    # CREATE TABLE speeds (timestamp DATETIME, speed NUMERIC);
     if currTime-lastLog > LOGGING_INTERVAL :
-      
+      logToDB(currSpeed)
       lastLog = currTime
-      conn=sqlite3.connect(dbname)
-      curs=conn.cursor()
-      curs.execute("INSERT INTO speeds values(datetime('now','localtime'), (?))", (currSpeed,))
-      conn.commit()
-      conn.close()
-      GPIO.output(12,False) # blink the LED
-      time.sleep(0.02)
-      GPIO.output(12,True)
-      print "LOGGING...." + speedStr + "     -- time to log (s) : "+ "{:4.2f}".format(time.time()-currTime)
-# end if
+      blinkLED
+      # end if
+
   lastState = currState
   lastTime = currTime
   time.sleep(0.0001)
