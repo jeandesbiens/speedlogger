@@ -3,21 +3,23 @@ import time
 import RPi.GPIO as GPIO
 import sqlite3
 
-def logToDB(atTime, atSpeed)
+dbname = 'logger.db'
+
+def logToDB(atSpeed)
   # CREATE TABLE speeds (timestamp DATETIME, speed NUMERIC);
   conn=sqlite3.connect(dbname)
   curs=conn.cursor()
-  curs.execute("INSERT INTO speeds values(datetime('now','localtime'), (?))", (currSpeed,))
+  curs.execute("INSERT INTO speeds values(datetime('now','localtime'), (?))", (atSpeed,))
   conn.commit()
   conn.close()
-  print "LOGGING...." + speedStr + "     -- time to log (s) : "+ "{:4.2f}".format(time.time()-currTime)
+  #print "LOGGING...." + speedStr + "     -- time to log (s) : "+ "{:4.2f}".format(time.time()-currTime)
 
 def blinkLED()
   GPIO.output(12,False) # blink the LED
   time.sleep(0.02)
   GPIO.output(12,True)
 
-dbname = 'logger.db'
+
 
 WHEEL_CIRCUMFERENCE = 2.114 #circonference of the wheel in meter
 LOGGING_INTERVAL = 5 # logging interval to database in seconds
