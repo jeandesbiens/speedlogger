@@ -71,7 +71,7 @@ while True:
     print outStr
 
     if currTime-lastLog > LOGGING_INTERVAL :
-      thread.start_new_thread( logToDB(currSpeed) )
+      thread.start_new_thread( logToDB,currSpeed )
       lastLog = currTime
       blinkLED
       # end if
