@@ -5,6 +5,8 @@ var express = require('express');
 var restapi = express();
 
 var lastKnownSpeed = 0;
+var firstRecordFound = false;
+var sessionStartTime;
  
 restapi.get('/', function(req, res){
   db.get("SELECT * FROM speeds ORDER BY timestamp DESC LIMIT 1", function(err, row){
@@ -38,17 +40,16 @@ restapi.get('/speed', function(req, res){
 
 restapi.get('/stats', function(req, res){
 	console.log("/stats endpoint has been called");
-	var firstRecordFound = false;
      db.all("select * from speeds where dateTime(timestamp) > date('now','-2 day')", function(err, rows){
      	rows.forEach(function (row) {  
      		if firstRecordFound = false {
      			firstRecordFound = true;
-     			var SessionStartTime = row.timestamp;
+     			sessionStartTime = row.timestamp;
      			console.log ('Session started at : '+ row.timestamp);
      		};
             console.log(row.speed);  
         }) ;
-        res.json('SessionStartTime',SessionStartTime)
+        res.json('SessionStartTime',sessionStartTime)
     });
 });
 
