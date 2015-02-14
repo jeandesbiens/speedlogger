@@ -23,6 +23,7 @@ var firstRecordFound = false;
 var sessionStartTime;
 var lastTime;
 var cumulDistance = 0.0;
+var lastRecordedSpeed = 0.0;
 
 restapi.get('/', function(req, res){
   db.get("SELECT * FROM speeds ORDER BY timestamp DESC LIMIT 1", function(err, row){
@@ -64,17 +65,22 @@ restapi.get('/stats', function(req, res){
      			firstRecordFound = true;
      			sessionStartTime = row.timestamp;
      			lastTime = row.timestamp;
-     			console.log ('Session started at : '+ sessionStartTime);
+     			//console.log ('Session started at : '+ sessionStartTime);
      		}
      		else { // this is not the first row
      			// compute distance as the product of speed over time interval
      			var dt = ((toDate(row.timestamp)-toDate(lastTime))/1000/3600); //delta in ms converted to hour
      			cumulDistance = cumulDistance + (row.speed * dt);
-     			console.log('culmul distance :'+cumulDistance);
+     			//console.log('culmul distance :'+cumulDistance);
      			lastTime = row.timestamp;
+     			lastRecordedSpeed = row.speed;
      		};
         }) ;
-        res.json(['sessionStartTime',sessionStartTime, 'cumulDistance',cumulDistance])
+        res.json(['sessionStartTime',sessionStartTime, 
+        	'duration',((toDate(lastTime)-toDate(sessionStartTime))/1000/3600),
+        	'cumulDistance',cumulDistance],
+        	'lastSpeed',lastRecordedSpeed,
+        	'averageSpeed',cumulDistance/((toDate(lastTime)-toDate(sessionStartTime))/1000/3600))
     });
 });
 
