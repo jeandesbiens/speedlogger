@@ -77,6 +77,7 @@ restapi.get('/stats', function(req, res){
      		};
         }) ;
         res.json(['sessionStartTime',sessionStartTime, 
+        	'sessionEndTime',lastTime,
         	'duration',((toDate(lastTime)-toDate(sessionStartTime))/1000/3600),
         	'cumulDistance',cumulDistance],
         	'lastSpeed',lastRecordedSpeed,
