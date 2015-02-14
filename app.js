@@ -58,7 +58,7 @@ restapi.get('/speed', function(req, res){
 restapi.get('/stats', function(req, res){
 	console.log("/stats endpoint has been called");
 	cumulDistance = 0.0;
-     db.all("select * from speeds where dateTime(timestamp) > date('now','-2 day')", function(err, rows){
+     db.all("select * from speeds where dateTime(timestamp) > date('now','-0 day')", function(err, rows){
      	rows.forEach(function (row) {  
      		// handle the first row that gives us the start time of the session
      		if (firstRecordFound == false) {
