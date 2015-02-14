@@ -53,7 +53,7 @@ restapi.get('/stats', function(req, res){
      		}
      		else { // this is not the first row
      			// compute distance as the product of speed over time interval
-     			dt = (row.timestamp - lastTime)/3600;	//time in seconds converted in hours (fraction of)
+     			var dt = (row.timestamp - lastTime)/3600;	//time in seconds converted in hours (fraction of)
      			cumulDistance = cumulDistance + row.speed * dt;
      			lastTime = row.timestamp;
      		};
