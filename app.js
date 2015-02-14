@@ -49,7 +49,7 @@ restapi.get('/stats', function(req, res){
      		};
             console.log(row.speed);  
         }) ;
-        res.json('SessionStartTime',sessionStartTime)
+        res.json(['SessionStartTime',sessionStartTime])
     });
 });
 
