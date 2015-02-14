@@ -38,11 +38,17 @@ restapi.get('/speed', function(req, res){
 
 restapi.get('/stats', function(req, res){
 	console.log("/stats endpoint has been called");
+	var firstRecordFound = false;
      db.all("select * from speeds where dateTime(timestamp) > date('now','-2 day')", function(err, rows){
      	rows.forEach(function (row) {  
+     		if firstRecordFound = false {
+     			firstRecordFound = true;
+     			var SessionStartTime = row.timestamp;
+     			console.log ('Session started at : '+ row.timestamp);
+     		};
             console.log(row.speed);  
         }) ;
-        res.json(rows)
+        res.json('SessionStartTime',SessionStartTime)
     });
 });
 
