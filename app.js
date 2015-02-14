@@ -42,10 +42,10 @@ restapi.get('/stats', function(req, res){
 	console.log("/stats endpoint has been called");
      db.all("select * from speeds where dateTime(timestamp) > date('now','-2 day')", function(err, rows){
      	rows.forEach(function (row) {  
-     		if firstRecordFound = false {
+     		if (firstRecordFound == false) {
      			firstRecordFound = true;
      			sessionStartTime = row.timestamp;
-     			console.log ('Session started at : '+ row.timestamp);
+     			console.log ('Session started at : '+ sessionStartTime);
      		};
             console.log(row.speed);  
         }) ;
