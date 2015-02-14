@@ -54,7 +54,8 @@ restapi.get('/stats', function(req, res){
      		else { // this is not the first row
      			// compute distance as the product of speed over time interval
      			var dt = (row.timestamp - lastTime)/3600;	//time in seconds converted in hours (fraction of)
-     			cumulDistance = cumulDistance + row.speed * dt;
+     			console.log('dt :'+dt);
+     			cumulDistance = cumulDistance + (row.speed * dt);
      			lastTime = row.timestamp;
      		};
         }) ;
@@ -85,4 +86,4 @@ restapi.post('/data', function(req, res){
  
 restapi.listen(1337, '192.168.1.104');
  
-console.log("Submit GET or POST to http://192.168.1.104:1337/data");
+console.log("Submit GET or POST to http://192.168.1.104:1337/stats");
