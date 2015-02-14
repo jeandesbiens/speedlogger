@@ -67,9 +67,9 @@ restapi.get('/stats', function(req, res){
      		}
      		else { // this is not the first row
      			// compute distance as the product of speed over time interval
-     			var dt = toDate(row.timestamp)-toDate(lastTime); 
-     			console.log('row last dt :'+' ' + thisDate+' ' + lastTime+' ' + dt);
+     			var dt = (toDate(row.timestamp)-toDate(lastTime)/1000/3600); //delta in ms converted to hour
      			cumulDistance = cumulDistance + (row.speed * dt);
+     			console.log('culmul distance :'+cumulDistance);
      			lastTime = row.timestamp;
      		};
         }) ;
