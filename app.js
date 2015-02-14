@@ -7,6 +7,8 @@ var restapi = express();
 var lastKnownSpeed = 0;
 var firstRecordFound = false;
 var sessionStartTime;
+var lastTime;
+var cumulDistance = 0.0;
  
 restapi.get('/', function(req, res){
   db.get("SELECT * FROM speeds ORDER BY timestamp DESC LIMIT 1", function(err, row){
@@ -42,14 +44,21 @@ restapi.get('/stats', function(req, res){
 	console.log("/stats endpoint has been called");
      db.all("select * from speeds where dateTime(timestamp) > date('now','-2 day')", function(err, rows){
      	rows.forEach(function (row) {  
+     		// handle the first row that gives us the start time of the session
      		if (firstRecordFound == false) {
      			firstRecordFound = true;
      			sessionStartTime = row.timestamp;
+     			lastTime = row.timestamp;
      			console.log ('Session started at : '+ sessionStartTime);
+     		}
+     		else { // this is not the first row
+     			// compute distance as the product of speed over time interval
+     			dt = (row.timestamp - lastTime)/3600;	//time in seconds converted in hours (fraction of)
+     			cumulDistance = cumulDistance + row.speed * dt;
+     			lastTime = row.timestamp;
      		};
-            console.log(row.speed);  
         }) ;
-        res.json(['SessionStartTime',sessionStartTime])
+        res.json(['sessionStartTime',sessionStartTime, 'cumulDistance',cumulDistance])
     });
 });
 
