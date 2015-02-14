@@ -53,7 +53,7 @@ restapi.get('/stats', function(req, res){
      		}
      		else { // this is not the first row
      			// compute distance as the product of speed over time interval
-     			var dt =(Date(row.timestamp).getTime()-Date(lastTime).getTime())
+     			//var dt =(Date(row.timestamp).getTime()-Date(lastTime).getTime())
      			console.log('row last dt :'+' ' + row.timestamp+' ' + lastTime+' ' + dt);
      			cumulDistance = cumulDistance + (row.speed * dt);
      			lastTime = row.timestamp;
