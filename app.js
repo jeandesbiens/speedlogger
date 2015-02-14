@@ -29,6 +29,13 @@ restapi.get('/', function(req, res){
     });
 });
 
+restapi.get('/speed', function(req, res){
+	console.log("/speed endpoint has been called");
+     db.get("SELECT * FROM speeds ORDER BY timestamp DESC LIMIT 1", function(err, row){
+        res.json(row)
+    });
+});
+
 restapi.get('/data', function(req, res){
 	console.log("/data endpoint has been called");
     db.all("SELECT * FROM speeds", function(err, rows){
