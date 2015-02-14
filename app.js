@@ -4,12 +4,26 @@ var db = new sqlite3.Database('logger.db');
 var express = require('express');
 var restapi = express();
 
+function toDate(dateString){
+	reggie = /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/g;
+	dateArray = reggie.exec(dateString); 
+	thisDate = new Date(
+	    (+dateArray[1]),
+	    (+dateArray[2])-1, // Careful, month starts at 0!
+	    (+dateArray[3]),
+	    (+dateArray[4]),
+	    (+dateArray[5]),
+	    (+dateArray[6])
+	);
+	return thisDate;
+};
+
 var lastKnownSpeed = 0;
 var firstRecordFound = false;
 var sessionStartTime;
 var lastTime;
 var cumulDistance = 0.0;
- 
+
 restapi.get('/', function(req, res){
   db.get("SELECT * FROM speeds ORDER BY timestamp DESC LIMIT 1", function(err, row){
   	if (err){
@@ -53,8 +67,8 @@ restapi.get('/stats', function(req, res){
      		}
      		else { // this is not the first row
      			// compute distance as the product of speed over time interval
-     			var dt = (Date(row.timestamp).getTime()-Date(lastTime).getTime()) 
-     			console.log('row last dt :'+' ' + row.timestamp+' ' + lastTime+' ' + dt);
+     			var dt = toDate(row.timestamp)-toDate(lastTime); 
+     			console.log('row last dt :'+' ' + thisDate+' ' + lastTime+' ' + dt);
      			cumulDistance = cumulDistance + (row.speed * dt);
      			lastTime = row.timestamp;
      		};
