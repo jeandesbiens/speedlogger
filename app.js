@@ -56,6 +56,7 @@ restapi.get('/speed', function(req, res){
 
 restapi.get('/stats', function(req, res){
 	console.log("/stats endpoint has been called");
+	cumulDistance = 0.0;
      db.all("select * from speeds where dateTime(timestamp) > date('now','-2 day')", function(err, rows){
      	rows.forEach(function (row) {  
      		// handle the first row that gives us the start time of the session
@@ -67,7 +68,7 @@ restapi.get('/stats', function(req, res){
      		}
      		else { // this is not the first row
      			// compute distance as the product of speed over time interval
-     			var dt = (toDate(row.timestamp)-toDate(lastTime)/1000/3600); //delta in ms converted to hour
+     			var dt = ((toDate(row.timestamp)-toDate(lastTime))/1000/3600); //delta in ms converted to hour
      			cumulDistance = cumulDistance + (row.speed * dt);
      			console.log('culmul distance :'+cumulDistance);
      			lastTime = row.timestamp;
