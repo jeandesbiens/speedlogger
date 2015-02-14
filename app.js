@@ -36,6 +36,16 @@ restapi.get('/speed', function(req, res){
     });
 });
 
+restapi.get('/stats', function(req, res){
+	console.log("/stats endpoint has been called");
+     db.all("select * from speeds where dateTime(timestamp) > date('now','-2 day')", function(err, rows){
+     	rows.forEach(function (row) {  
+            console.log(row.speed);  
+        }) ;
+        res.json(rows)
+    });
+});
+
 restapi.get('/data', function(req, res){
 	console.log("/data endpoint has been called");
     db.all("SELECT * FROM speeds", function(err, rows){
