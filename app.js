@@ -29,7 +29,7 @@ var lastRecordedSpeed = 0.0;
 restapi.use("/styles", express.static(__dirname + '/styles'));
 
 restapi.get('/',function(req,res){
-  res.sendfile(__dirname + '/views/index.html');
+  res.sendFile(__dirname + '/views/index.html');
 });
 
 
