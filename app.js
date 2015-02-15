@@ -25,62 +25,8 @@ var lastTime;
 var cumulDistance = 0.0;
 var lastRecordedSpeed = 0.0;
 
-//restapi.use(express.static(path.join(__dirname, 'public')));
-//restapi.set('views', __dirname + '/views');
-//restapi.set('view engine', 'html');
-
-restapi.get('/', function(req, res){
-  db.get("SELECT * FROM speeds ORDER BY timestamp DESC LIMIT 1", function(err, row){
-  	if (err){
-  		//console.error("ERROR detected at / endpoint : "+err);
-  	}
-  		else {
-  			lastKnownSpeed = row.speed;
-  		}
-    res.send('<!DOCTYPE html>'+
-		'<html>'+
-		'    <head>'+
-		'        <meta charset="utf-8" />'+
-		'		 <meta http-equiv="refresh" content="30">'+
-		'        <title>Tachymetre!</title>'+
-		'		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>'+
-		'		<script>'+
-		'		$.ajax("http://192.168.1.104:1337/stats", {method: "GET"}).then(function(data) {console.log(data);});'+
-		'		</script>'+
-		'    </head>'+ 
-		'    <body>'+
-		'     	<p>'+lastKnownSpeed+'</p>'+
-		'     	<p>Use /dashboard instead</p>'+
-
-		'    </body>'+
-		'</html>');
-        console.log("/ endpoint has been called, please use /dashboard instead,  returning data : "+lastKnownSpeed.toFixed(1)+" km/h");
-    });
-});
-
-restapi.get('/index',function(req,res){
+restapi.get('/',function(req,res){
   res.sendfile(__dirname + '/views/index.html');
-});
-
-restapi.get('/dashboard', function(req, res){
-	console.log("/dashboard endpoint has been called");
-    res.send('<!DOCTYPE html>'+
-		'<html>'+
-		'    <head>'+
-		'        <meta charset="utf-8" />'+
-		'		 <meta http-equiv="refresh" content="5">'+
-		'        <title>Tachymetre!</title>'+
-		'		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>'+
-		'		<script>'+
-		'		$.ajax("http://192.168.1.104:1337/stats", {method: "GET"}).then(function(data) {console.log(data);console.log(data[9]);$("#currSpeed").text(data[9]);});'+
-		'		</script>'+
-		'    </head>'+ 
-		'    <body>'+
-		'     	<p id="currSpeed" style="font-size:3em;font-weight:bold;"></p>'+
-
-		'    </body>'+
-		'</html>');
-        //console.log("/dashboard endpoint has been called");
 });
 
 

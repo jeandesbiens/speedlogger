@@ -6,11 +6,15 @@
         <title>Tachymetre!</title>
 		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script>
-		$.ajax("http://192.168.1.104:1337/stats", {method: "GET"}).then(function(data) {console.log(data);console.log(data[9]);$("#currSpeed").text(data[9]);});
+         function updateContent () {
+             $("#averageSpeed").text(data[11]);
+             $("#currSpeed").text(data[9]);
+         }
+		  $.ajax("http://192.168.1.104:1337/stats", {method: "GET"}).then(function(data) {updateContent();});
 		</script>
     </head> 
     <body>
-     	<p id="currSpeed" style="font-size:3em;font-weight:bold;"></p>
-this is from index.html
+     	<p><span id="averageSpeed" style="font-size:1em;"></span><span> km/h</span></p>
+        <p><span id="currSpeed" style="font-size:3em;font-weight:bold;"></span><span> km/h</span></p>
     </body>
 </html>
