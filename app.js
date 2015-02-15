@@ -25,6 +25,10 @@ var lastTime;
 var cumulDistance = 0.0;
 var lastRecordedSpeed = 0.0;
 
+restapi.use(express.static(path.join(__dirname, 'public')));
+restapi.set('views', __dirname + '/views');
+restapi.set('view engine', 'html');
+
 restapi.get('/', function(req, res){
   db.get("SELECT * FROM speeds ORDER BY timestamp DESC LIMIT 1", function(err, row){
   	if (err){
