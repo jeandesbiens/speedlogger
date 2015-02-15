@@ -25,6 +25,9 @@ var lastTime;
 var cumulDistance = 0.0;
 var lastRecordedSpeed = 0.0;
 
+
+restapi.use("/styles", express.static(__dirname + '/styles'));
+
 restapi.get('/',function(req,res){
   res.sendfile(__dirname + '/views/index.html');
 });
