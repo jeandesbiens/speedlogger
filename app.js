@@ -25,7 +25,7 @@ var lastTime;
 var cumulDistance = 0.0;
 var lastRecordedSpeed = 0.0;
 
-restapi.use(express.static(path.join(__dirname, 'public')));
+//restapi.use(express.static(path.join(__dirname, 'public')));
 restapi.set('views', __dirname + '/views');
 restapi.set('view engine', 'html');
 
