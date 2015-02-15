@@ -46,10 +46,11 @@ restapi.get('/', function(req, res){
 		'    </head>'+ 
 		'    <body>'+
 		'     	<p>'+lastKnownSpeed+'</p>'+
+		'     	<p>Use /dashboard instead</p>'+
 
 		'    </body>'+
 		'</html>');
-        //console.log("/ endpoint has been called, returning data : "+lastKnownSpeed.toFixed(1)+" km/h");
+        console.log("/ endpoint has been called, please use /dashboard instead,  returning data : "+lastKnownSpeed.toFixed(1)+" km/h");
     });
 });
 
@@ -59,7 +60,7 @@ restapi.get('/dashboard', function(req, res){
 		'<html>'+
 		'    <head>'+
 		'        <meta charset="utf-8" />'+
-		'		 <meta http-equiv="refresh" content="1000">'+
+		'		 <meta http-equiv="refresh" content="5">'+
 		'        <title>Tachymetre!</title>'+
 		'		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>'+
 		'		<script>'+
@@ -67,7 +68,7 @@ restapi.get('/dashboard', function(req, res){
 		'		</script>'+
 		'    </head>'+ 
 		'    <body>'+
-		'     	<p id="currSpeed">speed placeholder</p>'+
+		'     	<p id="currSpeed" style="font-size:3em;font-weight:bold;">speed placeholder</p>'+
 
 		'    </body>'+
 		'</html>');
