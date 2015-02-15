@@ -16,10 +16,12 @@
              console.log("getting an update from web api..."+Date.now());
              $.ajax("http://192.168.1.104:1337/stats", {method: "GET"}).then(function(data) {updateContent(data);});
           }
-          window.setTimeout(getUpdate(), 5000);
 		</script>
     </head> 
     <body>
+        <script>
+          window.setTimeout(getUpdate(), 5000);
+        </script>
         <p><span id="cumulDistance"></span><span> km</span></p>
      	<p><span id="averageSpeed"></span><span> km/h</span></p>
         <p><span id="currSpeed"></span><span> km/h</span></p>
