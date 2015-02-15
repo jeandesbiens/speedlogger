@@ -37,11 +37,16 @@ restapi.get('/', function(req, res){
 		'<html>'+
 		'    <head>'+
 		'        <meta charset="utf-8" />'+
-		'		 <meta http-equiv="refresh" content="5">'+
+		'		 <meta http-equiv="refresh" content="30">'+
 		'        <title>Tachymetre!</title>'+
+		'		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>'+
+		
 		'    </head>'+ 
 		'    <body>'+
 		'     	<p>'+lastKnownSpeed+'</p>'+
+		'		<script>'+
+		'		$.ajax("http://192.168.1.104:1337/stats", {method: "GET"}).then(function(data) {console.log(data);});'+
+		'		</script>'+
 		'    </body>'+
 		'</html>');
         //console.log("/ endpoint has been called, returning data : "+lastKnownSpeed.toFixed(1)+" km/h");
