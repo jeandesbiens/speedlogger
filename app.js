@@ -26,8 +26,8 @@ var cumulDistance = 0.0;
 var lastRecordedSpeed = 0.0;
 
 //restapi.use(express.static(path.join(__dirname, 'public')));
-restapi.set('views', __dirname + '/views');
-restapi.set('view engine', 'html');
+//restapi.set('views', __dirname + '/views');
+//restapi.set('view engine', 'html');
 
 restapi.get('/', function(req, res){
   db.get("SELECT * FROM speeds ORDER BY timestamp DESC LIMIT 1", function(err, row){
@@ -59,7 +59,7 @@ restapi.get('/', function(req, res){
 });
 
 restapi.get('/index',function(req,res){
-  res.render('index.html')
+  res.sendfile(__dirname + '/views/index.html');
 });
 
 restapi.get('/dashboard', function(req, res){
