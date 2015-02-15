@@ -13,6 +13,7 @@
              $("#currSpeed").text(data[9].toFixed(1));
          }
 		  function getUpdate(){
+             console.log("getting an update from web api...");
              $.ajax("http://192.168.1.104:1337/stats", {method: "GET"}).then(function(data) {updateContent(data);});
           }
           window.setTimeout(getUpdate(), 5000);
