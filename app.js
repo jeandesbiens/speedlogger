@@ -59,11 +59,11 @@ restapi.get('/dashboard', function(req, res){
 		'<html>'+
 		'    <head>'+
 		'        <meta charset="utf-8" />'+
-		'		 <meta http-equiv="refresh" content="10">'+
+		'		 <meta http-equiv="refresh" content="1000">'+
 		'        <title>Tachymetre!</title>'+
 		'		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>'+
 		'		<script>'+
-		'		$.ajax("http://192.168.1.104:1337/stats", {method: "GET"}).then(function(data) {console.log(data);var myData = JSON.parse(data);console.log(myData);$("#currSpeed").text(myData[0].lastSpeed);});'+
+		'		$.ajax("http://192.168.1.104:1337/stats", {method: "GET"}).then(function(data) {console.log(data);$("#currSpeed").text(data.lastSpeed);});'+
 		'		</script>'+
 		'    </head>'+ 
 		'    <body>'+
