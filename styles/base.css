@@ -2,6 +2,11 @@
 	font-family: 'Open Sans', sans-serif;
 }
 
+p{
+	display: inline;
+	width:25%;
+}
+
 #cumulDistance {
 	font-size: 2em;
 }
