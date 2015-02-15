@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+		 <meta http-equiv="refresh" content="5">
+        <title>Tachymetre!</title>
+		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script>
+		$.ajax("http://192.168.1.104:1337/stats", {method: "GET"}).then(function(data) {console.log(data);console.log(data[9]);$("#currSpeed").text(data[9]);});
+		</script>
+    </head> 
+    <body>
+     	<p id="currSpeed" style="font-size:3em;font-weight:bold;"></p>
+this is from index.html
+    </body>
+</html>
