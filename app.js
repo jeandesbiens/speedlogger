@@ -63,7 +63,7 @@ restapi.get('/dashboard', function(req, res){
 		'        <title>Tachymetre!</title>'+
 		'		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>'+
 		'		<script>'+
-		'		$.ajax("http://192.168.1.104:1337/stats", {method: "GET"}).then(function(data) {$('body').text(data);});'+
+		'		$.ajax("http://192.168.1.104:1337/stats", {method: "GET"}).then(function(data) {$("body").text(data);});'+
 		'		</script>'+
 		'    </head>'+ 
 		'    <body>'+
