@@ -20,7 +20,7 @@
     </head> 
     <body>
         <script>
-          window.setTimeout(getUpdate(), 5000);
+          window.setInterval(function() {getUpdate()}, 5000);
         </script>
         <p><span id="cumulDistance"></span><span> km</span></p>
      	<p><span id="averageSpeed"></span><span> km/h</span></p>
