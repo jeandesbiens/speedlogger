@@ -54,6 +54,10 @@ restapi.get('/', function(req, res){
     });
 });
 
+restapi.get('/index',function(req,res){
+  res.render('index.html')
+});
+
 restapi.get('/dashboard', function(req, res){
 	console.log("/dashboard endpoint has been called");
     res.send('<!DOCTYPE html>'+
@@ -68,7 +72,7 @@ restapi.get('/dashboard', function(req, res){
 		'		</script>'+
 		'    </head>'+ 
 		'    <body>'+
-		'     	<p id="currSpeed" style="font-size:3em;font-weight:bold;">speed placeholder</p>'+
+		'     	<p id="currSpeed" style="font-size:3em;font-weight:bold;"></p>'+
 
 		'    </body>'+
 		'</html>');
