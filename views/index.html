@@ -7,8 +7,8 @@
 		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script>
          function updateContent (data) {
-             $("#averageSpeed").text(data[11].toPrecision(1));
-             $("#currSpeed").text(data[9].toPrecision(1));
+             $("#averageSpeed").text(data[11].toFixed(1));
+             $("#currSpeed").text(data[9].toFixed(1));
          }
 		  $.ajax("http://192.168.1.104:1337/stats", {method: "GET"}).then(function(data) {updateContent(data);});
 		</script>
