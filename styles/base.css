@@ -2,3 +2,13 @@
 	font-family: 'Open Sans', sans-serif;
 }
 
+#cumulDistance {
+	font-size: 2em;
+}
+#averageSpeed {
+	font-size: 1em;
+}
+#currSpeed {
+	font-size: 3em;
+}
+
