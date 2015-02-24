@@ -58,15 +58,15 @@ while True:
     cumulDist += WHEEL_CIRCUMFERENCE
     
     #output strings
-    timeStr = "{:4.2f}".format((currTime-startTime)/60)+" min. "  #this is time for this session
-    distanceStr = "{:4.2f}".format(cumulDist/1000)+" km "
-    speedStr = "{:4.1f}".format(currSpeed)+" km/h "
+    timeStr = "{:4.2f}".format((currTime-startTime)/60)+" min.  "  #this is time for this session
+    distanceStr = "{:4.2f}".format(cumulDist/1000)+" km  "
+    speedStr = "{:4.1f}".format(currSpeed)+" km/h  "
     # voir http://www.siafoo.net/snippet/88 pour les code de couleurs
     if currSpeed < 20 :
       speedColorStr = "\033[1;43m"
     else :
       speedColorStr = "\033[1;42m"
-    meanSpeedStr = "{:4.2f}".format((cumulDist)/(currTime-startTime))+" m/s "
+    meanSpeedStr = "{:4.2f}".format((cumulDist)/(currTime-startTime)*3.6)+" km/h  "
     outStr = speedColorStr +speedStr + "\033[1;m" + meanSpeedStr + timeStr + distanceStr
     print outStr
 
